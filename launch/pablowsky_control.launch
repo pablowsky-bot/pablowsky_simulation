@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Control all pablowsky joints: right wheel and left wheel using ROS control.
+       NOTE: position, velocity and effort control becomes available -->
+
+  <!-- load ros control params to param server -->
+  <rosparam file="$(find pablowsky_simulation)/config/pablowsky_control.yaml" command="load" ns="pablowsky" />
+
+  <!-- spawn wheel motor control and joint state controllers -->
+  <node pkg="controller_manager" type="spawner" name="pablowsky_ctrl_spawner" ns="pablowsky"
+        output="screen" args="wheel_left_joint_controller
+                              wheel_right_joint_controller
+                              joint_state_controller" />
+
+</launch>
